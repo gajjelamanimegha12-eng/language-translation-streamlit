@@ -6,7 +6,13 @@ from gtts import gTTS
 import base64
 
 # read language dataset
-df = pd.read_csv(r'C:\Users\manim\Downloads\MULTIPLE LANGUAGE TRANSLATION\MULTIPLE LANGUAGE TRANSLATION\language.csv')
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "language.csv")
+
+df = pd.read_csv(csv_path)
+
 df.dropna(inplace=True)
 lang = df['name'].to_list()
 langlist=tuple(lang)
@@ -114,3 +120,4 @@ if len(inputtext) > 0 :
                 st.markdown(get_binary_file_downloader_html("lang.mp3", 'Audio File'), unsafe_allow_html=True)
     except Exception as e:
         st.error(e)
+
